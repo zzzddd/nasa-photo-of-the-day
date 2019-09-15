@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PhotoCard from "./nasaCard";
+import styled from "styled-components";
+import { Card, Img, Title, Description } from "./card"
+const Display = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
+
+const Male = styled(Card)`
+  color: black;
+  border: 3px solid black;
+  box-shadow: 20px 20px;
+`;
+
 
 export default function PhotoList() {
   // NOTE: The value given to useState() must be of the same type as your vale is expected to be
@@ -21,20 +35,26 @@ export default function PhotoList() {
 
   return (
     <div>
-      {photo.map(photo => {
-        return (
-          <PhotoCard 
-            key={photo.id}
-            title={photo.camera.full_name}
-            description={photo.img_src}
-            director={photo.rover.landing_date}
-            release_date={photo.earth_date}
-            // {pets.map(image => {
-            //   return <PetCard key={image} breed={breed} imgUrl={image} />;
-            // })}
-          />
-        );
-      })}
+      <Display>
+        {photo.map(photo => {
+          return (
+            <Male>
+              <PhotoCard
+                key={photo.id}
+                title={photo.camera.full_name}
+                description={photo.img_src}
+                director={photo.rover.landing_date}
+                release_date={photo.earth_date}
+                // {pets.map(image => {
+                //   return <PetCard key={image} breed={breed} imgUrl={image} />;
+                // })}
+              />
+            </Male>
+          );
+        })}
+      </Display>
     </div>
   );
 }
+
+
